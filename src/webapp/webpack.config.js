@@ -1,22 +1,34 @@
-var path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const output = path.join(__dirname, './dist');
 
 module.exports = {
-    resolve: {
-        modules: [
-            path.join(__dirname, 'src'),
-            "node_modules"
-        ]
-    },
-
-    entry: './src/app/app.js',
+    entry: __dirname + '/src/app/app',
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist')
+        path: output,
+        filename: 'bundle.js'
     },
+    cache: true,
+    watch: true,
+    devtool: NODE_ENV === 'development' ? 'source-map' : null,
     module: {
+
         rules: [
             {
-                test: /\.css$/,
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                loader: 'babel-loader',
+                query: {
+                    presets: ['es2015']
+                }
+            },
+            {
+                test: /\.(css|less)$/,
                 use: [
                     {
                         loader: "style-loader"
@@ -30,15 +42,38 @@ module.exports = {
                 ]
             },
             {
-                test: /\.less/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "less-loader"
-                ]
+                test: /\.(jpg|png|svg|ttf|eot|woff|woff2)$/,
+                loader: 'file?url?limit=100000name=[path][name].[ext]?[hash]'
+            },
+            {
+                test: /\.html$/,
+                loader: 'raw-loader'
             }
         ]
     },
-    devtool:"source-map"
-
+    devServer: {
+        contentBase: './dist',
+        address: 'localhost',
+        port: '9999',
+        // proxy: {
+        //     '/**': {
+        //         target: 'http://localhost:8080',
+        //         secure: false
+        //     }
+        // },
+        watchOptions: {
+            aggregateTimeout: 300,
+            poll: 1000
+        }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            inject: true,
+            template: __dirname + '/src/index.html'
+        }),
+        new ExtractTextPlugin('[name].css'),
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        })
+    ]
 };
