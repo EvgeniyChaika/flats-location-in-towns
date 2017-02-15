@@ -1,16 +1,31 @@
 'use strict';
 
-import './styles/main.less';
+import "./styles/main.less";
 import _ from "lodash";
 import "./../public/img/favicon.ico";
 
-function component() {
-    let element = document.createElement('div');
+import  'jquery';
 
-    /* lodash is required for the next line to work */
-    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-    console.log("Hello");
-    return element;
-}
+import angular from 'angular';
+import uiRouter from 'angular-ui-router';
+import uiBootstrap from 'angular-ui-bootstrap';
 
-document.body.appendChild(component());
+import './routes';
+import './content/main/main.controller';
+
+import MainComponent from "./content/main/main.controller";
+import ResultsComponent from "./content/results/results.controller";
+import routers from "./routes";
+
+const app = 'departmentsApp';
+
+angular.module(app, [
+    uiRouter,
+    uiBootstrap
+])
+    .config(routers)
+    .component('searchField', MainComponent)
+    .component('listResults', ResultsComponent);
+
+
+angular.bootstrap(document, [app]);
