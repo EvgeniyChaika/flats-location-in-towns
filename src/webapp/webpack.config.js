@@ -17,7 +17,6 @@ module.exports = {
     watch: true,
     devtool: NODE_ENV === 'development' ? 'source-map' : null,
     module: {
-
         rules: [
             {
                 test: /\.js$/,
@@ -38,16 +37,30 @@ module.exports = {
                         options: {
                             modules: true
                         }
+                    }]
+            },
+            {
+                test: /\.(jpg|svg|ttf|eot|woff|woff2)$/,
+                loader: 'file-loader?url-loader?limit=100000name=[path][name].[ext]?[hash]'
+            },
+            {
+                test: /\.(ico|png)$/,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            name: "[name].[ext]"
+                        }
                     }
                 ]
             },
             {
-                test: /\.(jpg|png|svg|ttf|eot|woff|woff2)$/,
-                loader: 'file?url?limit=100000name=[path][name].[ext]?[hash]'
-            },
-            {
                 test: /\.html$/,
-                loader: 'raw-loader'
+                use: [
+                    {
+                        loader: "raw-loader"
+                    }
+                ]
             }
         ]
     },
@@ -69,6 +82,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             inject: true,
+            favicon: 'src/public/img/favicon.ico',
             template: __dirname + '/src/index.html'
         }),
         new ExtractTextPlugin('[name].css'),

@@ -1,11 +1,12 @@
-import _ from 'lodash';
+import _ from "lodash";
+import "./../public/img/favicon.ico";
 
-function component () {
+function component() {
     let element = document.createElement('div');
 
     /* lodash is required for the next line to work */
-    element.innerHTML = _.join(['Hello','webpack'], ' ');
-console.log("Hello");
+    element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+    console.log("Hello");
     return element;
 }
 
