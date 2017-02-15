@@ -1,3 +1,6 @@
+'use strict';
+
+import './styles/main.less';
 import _ from "lodash";
 import "./../public/img/favicon.ico";
 

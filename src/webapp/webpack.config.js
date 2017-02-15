@@ -28,20 +28,11 @@ module.exports = {
             },
             {
                 test: /\.(css|less)$/,
-                use: [
-                    {
-                        loader: "style-loader"
-                    },
-                    {
-                        loader: "css-loader",
-                        options: {
-                            modules: true
-                        }
-                    }]
-            },
-            {
-                test: /\.(jpg|svg|ttf|eot|woff|woff2)$/,
-                loader: 'file-loader?url-loader?limit=100000name=[path][name].[ext]?[hash]'
+                loader: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    loader: "css-loader",
+                })
+
             },
             {
                 test: /\.(ico|png)$/,
@@ -53,6 +44,10 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(jpg|svg|ttf|eot|woff|woff2)$/,
+                loader: 'file-loader?url-loader?limit=100000name=[path][name].[ext]?[hash]'   //TODO
             },
             {
                 test: /\.html$/,
@@ -90,4 +85,5 @@ module.exports = {
             debug: true
         })
     ]
-};
+}
+;
