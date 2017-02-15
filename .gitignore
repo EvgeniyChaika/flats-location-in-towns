@@ -3,5 +3,5 @@
 *.iml
 out
 gen
-**/webapp/node_modules
-dist
+**/**/node_modules
+**/dist
