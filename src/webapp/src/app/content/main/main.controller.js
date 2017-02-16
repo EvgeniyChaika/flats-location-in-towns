@@ -9,8 +9,8 @@ class MainController {
         _$state.set(vm, $state);
     }
 
-    onSubmit() {
-        _$state.get(vm).go('listResults');
+    onSubmit(city) {
+        _$state.get(vm).go('listResults',{city});
     }
 }
 

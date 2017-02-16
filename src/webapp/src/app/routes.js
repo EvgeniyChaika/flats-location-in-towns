@@ -9,9 +9,12 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             title: 'main',
         })
         .state('listResults', {
-            url: '/results',
-            template: '<list-results></list-results>',
+            url: '/results/:city',
+            template: '<list-results result-data="$resolve.result"></list-results>',
             title: 'results',
+            resolve: {
+                result: (DataService, $stateParams) => ($stateParams.city) ? DataService.getListTowns($stateParams.city) : null
+            }
         });
 };
 
