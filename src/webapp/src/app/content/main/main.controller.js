@@ -4,7 +4,7 @@ let vm;
 const _$state = new WeakMap();
 
 class MainController {
-    constructor($state, $scope) {
+    constructor($state) {
         vm = this;
         _$state.set(vm, $state);
     }

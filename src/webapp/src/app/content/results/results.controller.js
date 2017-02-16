@@ -8,10 +8,15 @@ class ResultsController {
         vm = this;
         _$state.set(vm, $state);
         vm.items = $scope.$parent.$resolve.result.response.listings;
-        vm.totalPages= $scope.$parent.$resolve.result.response.total_pages;
+        vm.totalPages = $scope.$parent.$resolve.result.response.total_pages;
+        vm.city = $scope.$parent.$resolve.result.response.searchTown;
     }
-    viewPage(index) {
-        console.log("go Third Page -> property");
+
+    viewPage(item) {
+        _$state.get(vm).go('resultView', {
+            city: vm.city,
+            data: {item}
+        });
     }
 
     backToMain() {

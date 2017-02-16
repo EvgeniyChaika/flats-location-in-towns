@@ -15,6 +15,14 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             resolve: {
                 result: (DataService, $stateParams) => ($stateParams.city) ? DataService.getListTowns($stateParams.city) : null
             }
+        })
+        .state('resultView', {
+            url: '/results/:city/view',
+            template: '<result-view city-data="$resolve.item"></result-view>',
+            title: 'results',
+            params: {
+                data: null
+            }
         });
 };
 

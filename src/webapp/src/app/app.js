@@ -11,6 +11,7 @@ import uiBootstrap from "angular-ui-bootstrap";
 import DataService from "./content/utils/data.service";
 import MainComponent from "./content/main/main.controller";
 import ResultsComponent from "./content/results/results.controller";
+import ResultViewComponent from "./content/result.view/result.view.controller";
 import routers from "./routes";
 
 const app = 'flatsApp';
@@ -22,6 +23,7 @@ angular.module(app, [
     .config(routers)
     .service('DataService', DataService)
     .component('searchField', MainComponent)
-    .component('listResults', ResultsComponent);
+    .component('listResults', ResultsComponent)
+    .component('resultView', ResultViewComponent);
 
 angular.bootstrap(document, [app]);
