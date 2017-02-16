@@ -1,5 +1,6 @@
 <div>
     <button id="button" class="btn btn-primary btn-block" ng-click="resultView.backToResults()">< Back</button>
+    <button class="btn btn-primary btn-block" ng-click="resultView.initMap()">< Back</button>
     <div class="view">
         <img class="foto" align="left" ng-src="{{resultView.view.img_url}}"/>
 
@@ -10,5 +11,12 @@
 
             <p>{{resultView.view.summary}}</p>
         </div>
+    </div>
+    <div>
+        <ui-gmap-google-map ng-if="resultView.map.center"
+                            options='resultView.map.options'
+                            center='resultView.map.center'
+                            zoom='resultView.map.zoom'>
+        </ui-gmap-google-map>
     </div>
 </div>

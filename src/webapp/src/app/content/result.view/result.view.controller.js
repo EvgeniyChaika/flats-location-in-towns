@@ -3,13 +3,25 @@
 let vm;
 const _$state = new WeakMap();
 const _$stateParams = new WeakMap();
+const _uiGmapGoogleMapApi = new WeakMap();
 
 class ResultViewController {
-    constructor($state, $stateParams) {
+    constructor($state, $stateParams, uiGmapGoogleMapApi) {
         vm = this;
         _$state.set(vm, $state);
         _$stateParams.set(vm, $stateParams);
+        _uiGmapGoogleMapApi.set(vm, uiGmapGoogleMapApi);
         vm.view = _$stateParams.get(vm).data.item;
+        vm.map = null;
+        vm.latitude = _$stateParams.get(vm).data.item.latitude;
+        vm.longitude = _$stateParams.get(vm).data.item.longitude;
+        vm.initMap();
+    }
+
+    initMap() {
+        _uiGmapGoogleMapApi.get(vm).then((maps) => {
+            vm.map = {center: {latitude: vm.latitude, longitude: vm.longitude}, zoom: 10};
+        })
     }
 
     backToResults() {
@@ -17,7 +29,7 @@ class ResultViewController {
     }
 }
 
-ResultViewController.$inject = ['$state', '$stateParams'];
+ResultViewController.$inject = ['$state', '$stateParams', 'uiGmapGoogleMapApi'];
 
 const ResultViewComponent = {
     controller: ResultViewController,
