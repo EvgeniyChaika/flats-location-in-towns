@@ -15,13 +15,14 @@ class ResultViewController {
         vm.map = null;
         vm.latitude = _$stateParams.get(vm).data.item.latitude;
         vm.longitude = _$stateParams.get(vm).data.item.longitude;
-        vm.initMap();
+        vm.initMap(uiGmapGoogleMapApi);
     }
 
-    initMap() {
+    initMap(uiGmapGoogleMapApi) {
         _uiGmapGoogleMapApi.get(vm).then((maps) => {
             vm.map = {center: {latitude: vm.latitude, longitude: vm.longitude}, zoom: 10};
         })
+
     }
 
     backToResults() {
