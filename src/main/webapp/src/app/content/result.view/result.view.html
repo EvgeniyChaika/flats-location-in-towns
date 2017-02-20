@@ -1,6 +1,6 @@
 <div>
-    <button id="button" class="btn btn-primary btn-block" ng-click="resultView.backToResults()">< Back</button>
-    <button class="btn btn-primary btn-block" ng-click="resultView.initMap()">< Back</button>
+    <button id="button" class="btn btn-primary btn-block" ng-click="resultView.backToResults()">< Back to list results
+    </button>
     <div class="view">
         <img class="foto" align="left" ng-src="{{resultView.view.img_url}}"/>
 
@@ -18,5 +18,6 @@
                             center='resultView.map.center'
                             zoom='resultView.map.zoom'>
         </ui-gmap-google-map>
+        <markers models="resultView.marker" coords="'last_known_location'"></markers>
     </div>
 </div>

@@ -16,11 +16,26 @@ class ResultViewController {
         vm.latitude = _$stateParams.get(vm).data.item.latitude;
         vm.longitude = _$stateParams.get(vm).data.item.longitude;
         vm.initMap(uiGmapGoogleMapApi);
+        vm.marker = null;
     }
 
     initMap(uiGmapGoogleMapApi) {
         _uiGmapGoogleMapApi.get(vm).then((maps) => {
-            vm.map = {center: {latitude: vm.latitude, longitude: vm.longitude}, zoom: 10};
+            vm.map = {
+                center: {
+                    latitude: vm.latitude,
+                    longitude: vm.longitude
+                },
+                zoom: 10
+            };
+            vm.marker = [{
+                id: "first",
+                stuff: "stuff",
+                last_known_location: {
+                    latitude: vm.latitude,
+                    longitude: vm.longitude
+                }
+            }];
         })
 
     }
