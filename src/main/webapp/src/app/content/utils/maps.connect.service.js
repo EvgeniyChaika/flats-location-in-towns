@@ -9,11 +9,12 @@ class MapsConnectService {
         vm = this;
         _$http.set(vm, $http);
         _$q.set(vm, $q);
+       vm.http = $http;
     }
 
     getKeyApi() {
         console.log("key");
-        return _$http.get(vm)('/getMapsApiKey');
+        return vm.http.get('/getMapsApiKey');
         // return 'key'
     }
 }

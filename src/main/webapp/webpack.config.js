@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 const NODE_ENV = process.env.NODE_ENV || 'development';
 
-const output = path.join(__dirname, './../../target/static');
+const output = path.join(__dirname, './../../../target/static');
 
 module.exports = {
     entry: __dirname + '/src/app/app',
@@ -60,9 +60,9 @@ module.exports = {
         ]
     },
     devServer: {
-        contentBase: './../../target/static',
+        // contentBase: './../../../target/static',
         address: 'localhost',
-        port: '9999',
+        port: '8888',
         proxy: {
             '/**': {
                 target: 'http://localhost:8080',

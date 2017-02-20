@@ -15,7 +15,7 @@ public class MainController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String indexPage() {
-        return "index.html";
+        return "index";
 
     }
 
