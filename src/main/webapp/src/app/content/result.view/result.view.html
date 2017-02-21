@@ -13,11 +13,32 @@
         </div>
     </div>
     <div>
-        <ui-gmap-google-map ng-if="resultView.map.center"
-                            options='resultView.map.options'
-                            center='resultView.map.center'
-                            zoom='resultView.map.zoom'>
+        <!--<ui-gmap-google-map ng-if="resultView.map.center"-->
+                            <!--options='resultView.map.options'-->
+                            <!--center='resultView.map.center'-->
+                            <!--zoom='resultView.map.zoom'>-->
+            <!--&lt;!&ndash;<ui-gmap-markers models="resultView.marker"&ndash;&gt;-->
+            <!--&lt;!&ndash;coords="'self'"&ndash;&gt;-->
+            <!--&lt;!&ndash;icon="'icon'"&ndash;&gt;-->
+            <!--&lt;!&ndash;click="resultView.onClick"&ndash;&gt;-->
+            <!--&lt;!&ndash;idkey="resultView.marker.idKey">&ndash;&gt;-->
+            <!--&lt;!&ndash;</ui-gmap-markers>&ndash;&gt;-->
+            <!--<ui-gmap-marker coords="resultView.marker.coords"-->
+                            <!--idkey="resultView.marker.id"-->
+                            <!--click="resultView.onClick">-->
+            <!--</ui-gmap-marker>-->
+            <!--<ui-gmap-window coords="resultView.activeModel"-->
+                            <!--options="resultView.windowOptions"-->
+                            <!--show="resultView.activeModel.show">-->
+            <!--</ui-gmap-window>-->
+        <!--</ui-gmap-google-map>-->
+        <ui-gmap-google-map center="resultView.map.center" zoom="resultView.map.zoom" draggable="true" options="resultView.options" bounds="resultView.map.bounds">
+
+            <ui-gmap-markers models="resultView.markers" coords="'self'" icon="'icon'" click="resultView.onClick">
+            </ui-gmap-markers>
+
+            <ui-gmap-window coords="resultView.activeModel" options="resultView.windowOptions" show="resultView.activeModel.show">
+            </ui-gmap-window>
         </ui-gmap-google-map>
-        <markers models="resultView.marker" coords="'last_known_location'"></markers>
     </div>
 </div>

@@ -24,7 +24,7 @@ angular.module(app, [
     'uiGmapgoogle-maps'
 ])
     .config(routers)
-    .config(( uiGmapGoogleMapApiProvider) => {
+    .config((uiGmapGoogleMapApiProvider) => {
         uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyCSMTIwfP30MjsHQKtom6o1g0vECmkAmgg',
             v: '3', //defaults to latest 3.X anyhow

@@ -6,38 +6,70 @@ const _$stateParams = new WeakMap();
 const _uiGmapGoogleMapApi = new WeakMap();
 
 class ResultViewController {
-    constructor($state, $stateParams, uiGmapGoogleMapApi) {
+    constructor($state, $stateParams, uiGmapGoogleMapApi, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _$stateParams.set(vm, $stateParams);
         _uiGmapGoogleMapApi.set(vm, uiGmapGoogleMapApi);
         vm.view = _$stateParams.get(vm).data.item;
-        vm.map = null;
         vm.latitude = _$stateParams.get(vm).data.item.latitude;
         vm.longitude = _$stateParams.get(vm).data.item.longitude;
-        vm.initMap(uiGmapGoogleMapApi);
-        vm.marker = null;
-    }
+        vm.map = {
+            center: {
+                latitude: vm.latitude,
+                longitude: vm.longitude
+            },
+            zoom: 14,
+            bounds: {}
+        };
+        vm.options = {
+            scrollwheel: false
+        };
+        vm.markers = [];
+        vm.marker = {
+            latitude: vm.latitude,
+            longitude: vm.longitude,
+            title: 'Flat',
+            show: false,
+            id: 1
+        };
+        vm.activeModel = {};
+        vm.windowOptions = {
+            boxClass: "infobox",
+            boxStyle: {
+                backgroundColor: "white",
+                border: "1px solid red",
+                borderRadius: "1px",
+                width: "150px",
+                height: "50px",
+                padding: "5px"
+            },
+            content: "latitude: " + vm.latitude + ",\nlongitude : " + vm.longitude,
+            disableAutoPan: true,
+            maxWidth: 0,
+            zIndex: null,
+            closeBoxURL: "http://www.google.com/intl/en_us/mapfiles/close.gif",
+            isHidden: false,
+            pane: "floatPane",
+            enableEventPropagation: false
+        };
+        vm.onClick = (marker, eventName, model) => {
+            console.log("Clicked!");
+            model.show = !model.show;
+            vm.activeModel = model;
+        };
 
-    initMap(uiGmapGoogleMapApi) {
-        _uiGmapGoogleMapApi.get(vm).then((maps) => {
-            vm.map = {
-                center: {
-                    latitude: vm.latitude,
-                    longitude: vm.longitude
-                },
-                zoom: 10
-            };
-            vm.marker = [{
-                id: "first",
-                stuff: "stuff",
-                last_known_location: {
-                    latitude: vm.latitude,
-                    longitude: vm.longitude
-                }
-            }];
-        })
-
+        // Get the bounds from the map once it's loaded
+        $scope.$watch(function () {
+            return vm.map.bounds;
+        }, function (nv, ov) {
+            // Only need to regenerate once
+            if (!ov.southwest && nv.southwest) {
+                let markers = [];
+                markers.push(vm.marker);
+                vm.markers = markers;
+            }
+        }, true);
     }
 
     backToResults() {
@@ -45,7 +77,7 @@ class ResultViewController {
     }
 }
 
-ResultViewController.$inject = ['$state', '$stateParams', 'uiGmapGoogleMapApi'];
+ResultViewController.$inject = ['$state', '$stateParams', 'uiGmapGoogleMapApi', '$scope'];
 
 const ResultViewComponent = {
     controller: ResultViewController,
