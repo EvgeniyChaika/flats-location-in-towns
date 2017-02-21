@@ -5,34 +5,27 @@ const _$state = new WeakMap();
 const _$stateParams = new WeakMap();
 const _uiGmapGoogleMapApi = new WeakMap();
 
-class ResultViewController {
+class ResultsViewController {
     constructor($state, $stateParams, uiGmapGoogleMapApi, $scope) {
         vm = this;
         _$state.set(vm, $state);
         _$stateParams.set(vm, $stateParams);
         _uiGmapGoogleMapApi.set(vm, uiGmapGoogleMapApi);
-        vm.view = _$stateParams.get(vm).data;
-        vm.latitude = _$stateParams.get(vm).data.latitude;
-        vm.longitude = _$stateParams.get(vm).data.longitude;
+        vm.items = _$stateParams.get(vm).items;
+        vm.latitude = _$stateParams.get(vm).items[0].latitude;
+        vm.longitude = _$stateParams.get(vm).items[0].longitude;
         vm.map = {
             center: {
                 latitude: vm.latitude,
                 longitude: vm.longitude
             },
-            zoom: 14,
+            zoom: 10,
             bounds: {}
         };
         vm.options = {
             scrollwheel: false
         };
         vm.markers = [];
-        vm.marker = {
-            latitude: vm.latitude,
-            longitude: vm.longitude,
-            title: 'Flat',
-            show: false,
-            id: 1
-        };
         vm.activeModel = {};
         vm.windowOptions = {
             boxClass: "infobox",
@@ -53,8 +46,23 @@ class ResultViewController {
             pane: "floatPane",
             enableEventPropagation: false
         };
+        vm.createMarker = function (i, latitude, longitude, bounds, idKey) {
+            if (idKey == null) {
+                idKey = "id";
+            }
+
+            let ret = {
+                latitude: latitude,
+                longitude: longitude,
+                title: 'flat' + i,
+                show: false
+            };
+            ret[idKey] = i;
+            return ret;
+        };
         vm.onClick = (marker, eventName, model) => {
             console.log("Clicked!");
+            vm.windowOptions.content = "latitude: " + model.latitude + ",\nlongitude : " + model.longitude;
             model.show = !model.show;
             vm.activeModel = model;
         };
@@ -65,9 +73,11 @@ class ResultViewController {
         }, function (nv, ov) {
             // Only need to regenerate once
             if (!ov.southwest && nv.southwest) {
-                let markers = [];
-                markers.push(vm.marker);
-                vm.markers = markers;
+                let list = [];
+                for (let index = 0; index < vm.items.length; index++) {
+                    list.push(vm.createMarker(index, vm.items[index].latitude, vm.items[index].longitude, vm.map.bounds));
+                }
+                vm.markers = list;
             }
         }, true);
     }
@@ -77,12 +87,12 @@ class ResultViewController {
     }
 }
 
-ResultViewController.$inject = ['$state', '$stateParams', 'uiGmapGoogleMapApi', '$scope'];
+ResultsViewController.$inject = ['$state', '$stateParams', 'uiGmapGoogleMapApi', '$scope'];
 
-const ResultViewComponent = {
-    controller: ResultViewController,
-    controllerAs: 'resultView',
-    template: require('./result.view.html')
+const ResultsViewComponent = {
+    controller: ResultsViewController,
+    controllerAs: 'resultsView',
+    template: require('./results.view.html')
 };
 
-export default ResultViewComponent;
+export default ResultsViewComponent;

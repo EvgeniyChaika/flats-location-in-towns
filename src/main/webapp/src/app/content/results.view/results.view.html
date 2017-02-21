@@ -1,0 +1,25 @@
+<div>
+    <button id="button" class="btn btn-primary btn-block" ng-click="resultsView.backToResults()">< Back to list results
+    </button>
+    <div>
+        <ui-gmap-google-map ng-if="resultsView.map.center"
+                            center="resultsView.map.center"
+                            zoom="resultsView.map.zoom"
+                            draggable="true"
+                            options="resultsView.options"
+                            bounds="resultsView.map.bounds">
+
+            <ui-gmap-markers models="resultsView.markers"
+                             coords="'self'"
+                             icon="'icon'"
+                             click="resultsView.onClick">
+            </ui-gmap-markers>
+
+            <ui-gmap-window ng-if="resultsView.activeModel"
+                            coords="resultsView.activeModel"
+                            options="resultsView.windowOptions"
+                            show="resultsView.activeModel.show">
+            </ui-gmap-window>
+        </ui-gmap-google-map>
+    </div>
+</div>

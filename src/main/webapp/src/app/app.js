@@ -13,6 +13,7 @@ import DataService from "./content/utils/data.service";
 // import MapsConnectService from "./content/utils/maps.connect.service"; //TODO
 import MainComponent from "./content/main/main.controller";
 import ResultsComponent from "./content/results/results.controller";
+import ResultsViewComponent from "./content/results.view/results.view.controller";
 import ResultViewComponent from "./content/result.view/result.view.controller";
 import routers from "./routes";
 
@@ -35,6 +36,7 @@ angular.module(app, [
     // .service('MapsConnectService', MapsConnectService) //TODO
     .component('searchField', MainComponent)
     .component('listResults', ResultsComponent)
+    .component('resultsView', ResultsViewComponent)
     .component('resultView', ResultViewComponent);
 
 angular.bootstrap(document, [app]);

@@ -15,12 +15,20 @@ class ResultsController {
     viewPage(item) {
         _$state.get(vm).go('resultView', {
             city: vm.city,
-            data: {item}
+            data: item
         });
     }
 
     backToMain() {
         _$state.get(vm).go('mainPage');
+    }
+
+    toResultsView() {
+        _$state.get(vm).go('resultsView', {
+                city: vm.city,
+                items: vm.items
+            }
+        );
     }
 }
 

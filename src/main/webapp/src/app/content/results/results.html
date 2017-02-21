@@ -1,5 +1,9 @@
 <div>
     <button id="button" class="btn btn-primary btn-block" ng-click="listResults.backToMain()">< Back to search</button>
+    <button id="button2" class="btn btn-primary btn-block"
+            ng-click="listResults.toResultsView()">
+        > Go to results view
+    </button>
     <div class="matches">{{listResults.items.length}} of {{listResults.totalPages}} matches</div>
     <ul>
         <li class="image" ng-repeat="item in listResults.items" ng-click="listResults.viewPage(item)">

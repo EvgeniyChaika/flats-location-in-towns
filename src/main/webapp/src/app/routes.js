@@ -6,20 +6,28 @@ const routers = ($stateProvider, $urlRouterProvider) => {
         .state('mainPage', {
             url: '/',
             template: '<search-field></search-field>',
-            title: 'main',
+            title: 'Main',
         })
         .state('listResults', {
             url: '/results/:city',
             template: '<list-results result-data="$resolve.result"></list-results>',
-            title: 'results',
+            title: 'Results',
             resolve: {
                 result: (DataService, $stateParams) => ($stateParams.city) ? DataService.getListTowns($stateParams.city) : null
+            }
+        })
+        .state('resultsView', {
+            url: '/results/:city/results-view',
+            template: '<results-view list-results="$resolve.list"></results-view>',
+            title: 'Results View',
+            params: {
+                items: null
             }
         })
         .state('resultView', {
             url: '/results/:city/view',
             template: '<result-view city-data="$resolve.item"></result-view>',
-            title: 'results',
+            title: 'Result View',
             params: {
                 data: null
             }
