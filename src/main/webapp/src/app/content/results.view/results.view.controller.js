@@ -25,6 +25,7 @@ class ResultsViewController {
         vm.options = {
             scrollwheel: false
         };
+        // vm.marker = {};
         vm.markers = [];
         vm.activeModel = {};
         vm.windowOptions = {
@@ -51,14 +52,23 @@ class ResultsViewController {
                 idKey = "id";
             }
 
-            let ret = {
+            let mark = {
                 latitude: latitude,
                 longitude: longitude,
                 title: 'flat' + i,
                 show: false
             };
-            ret[idKey] = i;
-            return ret;
+            mark[idKey] = i;
+            if (i % 2 == 0) {
+                mark.options = {
+                    icon: require('../../../public/img/pink-marker.png')
+                }
+            } else {
+                mark.options = {
+                    icon: require('../../../public/img/blue-marker.png')
+                }
+            }
+            return mark;
         };
         vm.onClick = (marker, eventName, model) => {
             console.log("Clicked!");

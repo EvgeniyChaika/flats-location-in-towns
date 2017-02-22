@@ -31,7 +31,12 @@ class ResultViewController {
             longitude: vm.longitude,
             title: 'Flat',
             show: false,
-            id: 1
+            // icon: '../../../public/img/logo.png',
+            // icon: '{url:    "//developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png" }',
+            id: 1,
+            options: {
+                icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+            }
         };
         vm.activeModel = {};
         vm.windowOptions = {

@@ -21,7 +21,7 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             template: '<results-view list-results="$resolve.list"></results-view>',
             title: 'Results View',
             params: {
-                items: null
+                items: []
             }
         })
         .state('resultView', {
@@ -29,7 +29,7 @@ const routers = ($stateProvider, $urlRouterProvider) => {
             template: '<result-view city-data="$resolve.item"></result-view>',
             title: 'Result View',
             params: {
-                data: null
+                data: {}
             }
         });
 };
