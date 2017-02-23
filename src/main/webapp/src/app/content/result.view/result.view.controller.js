@@ -27,16 +27,12 @@ class ResultViewController {
         };
         vm.markers = [];
         vm.marker = {
+            id: 1,
             latitude: vm.latitude,
             longitude: vm.longitude,
             title: 'Flat',
-            show: false,
-            // icon: '../../../public/img/logo.png',
-            // icon: '{url:    "//developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png" }',
-            id: 1,
-            options: {
-                icon:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
-            }
+            icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+            show: false
         };
         vm.activeModel = {};
         vm.windowOptions = {

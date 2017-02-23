@@ -25,7 +25,6 @@ class ResultsViewController {
         vm.options = {
             scrollwheel: false
         };
-        // vm.marker = {};
         vm.markers = [];
         vm.activeModel = {};
         vm.windowOptions = {
@@ -34,7 +33,7 @@ class ResultsViewController {
                 backgroundColor: "white",
                 border: "1px solid red",
                 borderRadius: "1px",
-                width: "150px",
+                width: "160px",
                 height: "50px",
                 padding: "5px"
             },
@@ -56,17 +55,14 @@ class ResultsViewController {
                 latitude: latitude,
                 longitude: longitude,
                 title: 'flat' + i,
+                icon: '',
                 show: false
             };
             mark[idKey] = i;
             if (i % 2 == 0) {
-                mark.options = {
-                    icon: require('../../../public/img/pink-marker.png')
-                }
+                mark.icon = 'http://www.googlemapsmarkers.com/v1/A/0099FF/'
             } else {
-                mark.options = {
-                    icon: require('../../../public/img/blue-marker.png')
-                }
+                mark.icon = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
             }
             return mark;
         };

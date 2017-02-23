@@ -21,12 +21,13 @@
                             bounds="resultView.map.bounds">
 
             <ui-gmap-markers models="resultView.markers"
-                             options="resultView.marker.options"
+                             icon="'icon'"
                              coords="'self'"
                              click="resultView.onClick">
             </ui-gmap-markers>
 
-            <ui-gmap-window coords="resultView.activeModel"
+            <ui-gmap-window ng-if="resultView.activeModel"
+                            coords="resultView.activeModel"
                             options="resultView.windowOptions"
                             show="resultView.activeModel.show">
             </ui-gmap-window>
